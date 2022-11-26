@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import torch
 import torch.nn as nn
 from torch.utils.data.sampler import SubsetRandomSampler
-
+from torch.utils.data import TensorDataset, DataLoader
 
 # load numpy arrays from img_classes.npy and img_data.npy
 img_data = np.load('img_data.npy', mmap_mode='r')
@@ -41,16 +41,21 @@ assert x_test.shape[0] == y_test.shape[0], \
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+
+train_data = TensorDataset(x_train, y_train)
+
+test_data = TensorDataset(x_test, y_test)
+
 # feed data to train and test loader
-train_loader = torch.utils.data.DataLoader(
-    x_train,
-    batch_size=100,
+train_loader = DataLoader(
+    train_data,
+    batch_size=128,
     shuffle=True
 )
 
-test_loader = torch.utils.data.DataLoader(
-    x_test,
-    batch_size=100,
+test_loader = DataLoader(
+    test_data,
+    batch_size=128,
     shuffle=True
 )
 
