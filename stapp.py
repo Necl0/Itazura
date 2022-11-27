@@ -42,7 +42,7 @@ if st.button("Predict"):
     img.save('temp.png')
 
     # convert image to numpy array
-    img = 1 - (np.asarray(Image.open("./temp.png").convert("L").resize((28, 28))) / 255)
+    img = 1 - (np.asarray(Image.open("./temp.png").convert("L").resize((224, 224))) / 255)
 
     # test
     print(np.sum(img))
