@@ -60,6 +60,7 @@ test_loader = DataLoader(
 )
 
 
+
 class VGG16(nn.Module):
     def __init__(self, num_classes=10):
         super(VGG16, self).__init__()
@@ -200,4 +201,12 @@ with torch.no_grad():
 
     print(f"Accuracy of the network on the {30_000} test images: {100*correct/total}")
 
-torch.save(model.state_dict(), 'model.pth')
+with open('max_acc.txt', 'r') as f:
+    max_acc = float(f.read())
+
+    if 100*correct/total > max_acc:
+        torch.save(model.state_dict(), 'model.ckpt')
+        with open('max_acc.txt', 'w') as f:
+            f.write(str(100*correct/total))
+            print('\nNew model saved')
+
