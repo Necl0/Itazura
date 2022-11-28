@@ -21,7 +21,8 @@ tree = QuickDrawDataGroup('tree', max_drawings=max_d)
 dog = QuickDrawDataGroup('dog', max_drawings=max_d)
 
 
-img_data = np.array([[np.array(drawing.get_image().resize((224, 224)).convert('L')) for drawing in c.drawings] for c in [airplanes, castle, dragon,
+img_data = np.array([[np.array(drawing.get_image().resize((224, 224)).convert('L')) for drawing in c.drawings] for c in
+                                                                                          [airplanes, castle, dragon,
                                                                                           duck, fork, hexagon,
                                                                                           key, mountain, octopus,
                                                                                           pizza, star, submarine,
@@ -33,9 +34,6 @@ img_classes = np.array([[drawing.name for drawing in c.drawings] for c in [airpl
                                                                              star, submarine, sun, tree, dog]]
                        )
 
-
-print(img_data.shape)
-print(img_data[0][0].shape)
 
 np.save('img_data.npy', img_data)
 np.save('img_classes.npy', img_classes)
