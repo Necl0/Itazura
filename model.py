@@ -3,7 +3,6 @@ import os
 from sklearn.model_selection import train_test_split
 import torch
 import torch.nn as nn
-from torch.utils.data.sampler import SubsetRandomSampler
 from torch.utils.data import TensorDataset, DataLoader
 
 # load numpy arrays from img_classes.npy and img_data.npy
@@ -58,7 +57,6 @@ test_loader = DataLoader(
     batch_size=128,
     shuffle=True
 )
-
 
 
 class VGG16(nn.Module):
@@ -153,6 +151,7 @@ class VGG16(nn.Module):
         return out
 
 
+# hyperparameters
 num_classes = 15
 num_epochs = 20
 batch_size = 16
@@ -209,4 +208,3 @@ with open('max_acc.txt', 'r') as f:
         with open('max_acc.txt', 'w') as f:
             f.write(str(100*correct/total))
             print('\nNew model saved')
-
